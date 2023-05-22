@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
 
-// const contactInitialState = [
-//     { "number": "0635675", "name": "Marina", "id": "ph921gGFo1wx08vAQiVcN" },
-//     { "number": "1115", "name": "Ben", "id": "ph921gGFo1wx08vAQiVcd" },
-//     { "number": "1115", "name": "test", "id": "ph921gGFo1uu08vAQiVcb" }
-    
-// ];
 const handlePending = state => {
     state.isLoading = true;
 };
@@ -53,39 +47,3 @@ const contactSlice = createSlice({
 
 export const contactsReducer = contactSlice.reducer;
 
-
-// reducers: {
-    //     fetchingInProgress(state){
-    //         state.isLoading = true
-    //     },
-    //     fetchingSucces(){
-    //     state.IsLoading = false,
-    //     state.error = null,
-    //     state.items = action.payload
-    //     },
-    //     fetchingError(){
-    //     state.isLoading = false,
-    //     state.error = action.payload
-    //     },
-        // addContact(state, action) {
-        //     state.push(action.payload)
-        // },
-        // prepare(values) {
-        //     return {
-        //         payload: {
-        //             name: values.name,
-        //             number: values.number,
-        //             id: nanoid(),
-        //       }
-        //   }
-        // },
-        // deleteContact(state, action) {
-        //    const index = state.findIndex(contact => contact.id === action.payload);
-        //     state.splice(index, 1);
-        // },
-    // }
-    
-
-// export const { addContact, deleteContact } = contactSlice.actions;
-// export const contactReducer = contactSlice.reducer;
-// export const { fetchingInProgress, fetchingSucces, fetchingError } = contactSlice.actions;

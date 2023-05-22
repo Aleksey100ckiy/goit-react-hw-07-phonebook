@@ -9,13 +9,13 @@ const filterSlice = createSlice({
         setFilter(state, action) {
             return action.payload
         },
-        prepare(values) {
-            return {
-                payload: {
-                    filter: values.filter,
-                }
-            }
-        }
+        // prepare(values) {
+        //     return {
+        //         payload: {
+        //             filter: values.filter,
+        //         }
+        //     }
+        // }
     }
 }
 );
