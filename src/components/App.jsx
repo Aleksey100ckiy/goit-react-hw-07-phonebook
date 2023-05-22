@@ -1,46 +1,56 @@
-// import React, { useState, useEffect } from "react";
+import {  useEffect } from "react";
 // import { configureStore } from "@reduxjs/toolkit";
 // import { rootReducer } from "./reducer";
 import { FormField } from './FormField/FormField'
 import ContactList from "./ContactList/ContactList";
 import FindField from "./FindField/FindField";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchContacts, addContact, deleteContact } from "redux/operations";
+import {selectContact, selectFilter } from "../redux/selectors"
 
 
-import { useDispatch } from "react-redux";
-import { addContact, deleteContact } from "redux/contactSlice";
-import { setFilter } from 'redux/filterSlice';
-import { getContact, getFilter } from 'redux/selectors';
+// import { useDispatch } from "react-redux";
+// import { addContact, deleteContact } from "redux/contactSlice";
+// import { setFilter } from 'redux/filterSlice';
+// import { getContact, getFilter } from 'redux/selectors';
 
 
 
-export default function App() {
+export default function App () {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContact);
-  const filter = useSelector(getFilter);
+  // const { items, isLoading, error } = useSelector(getContact);
+  const contacts = useSelector(selectContact);
+  const filter = useSelector(selectFilter);
   const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(filter));
-
+  // const isLoading = useSelector(selectIsLoading);
+  // const error = useSelector(selectError);
   
-   const handleSubmit = (event, ) => {
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
+  const handleSubmit = event => {
+    // event.preventDefault();
      dispatch(addContact(event));
      console.log(event);
-    // event.reset()
+    event.resetForm();
   };
 
 
   const handleFilterChanging = event => {
     event.preventDefault();
-    dispatch(setFilter(event.target.value))
+    dispatch(selectFilter(event.target.value))
     console.log(event.target.value)
     console.log('filter-', filter);
   }
 
-  const handleDel = (id) => {
+//   const handleDel = (id) => {
  
-  dispatch(deleteContact(id));
+//   dispatch(deleteContact(id));
 
-} 
+// } 
+  
+  const handleDel = (id) => dispatch(deleteContact(id)) 
 
 return (<div>
   <FormField contArr={contacts} onSubmit={handleSubmit}></FormField> 
@@ -51,3 +61,4 @@ return (<div>
   
 )
 }
+// (filteredContacts.length > 0) ? filteredContacts :
